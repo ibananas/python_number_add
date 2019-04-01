@@ -3,14 +3,19 @@
 # @Author   : 刘洪波
 # @Filename : 默认.py
 # @Software : PyCharm
-
-num1="2649821731631836529481632803462831616487712734074314936141303241873417434716340124362304724324324324324323412121323164329751831"
-num2="1045091731748365195814509145981509438583247509149821493213241431431319999999999999999999999999999999999999999999999999341344779"
-
+import random
 import time
+
+
 class num_add(object):
     def add1(self,a,b):  # 第一种方法，由于python3具有无限精度的int类型，所以大数可以直接运算
-        print(int(a)+int(b))
+        startTime = time.time()
+        c=int(a)+int(b)
+        totalTime=time.time()-startTime
+        print(c)
+        print('方法一耗时{0}ms'.format(totalTime))
+        return c,totalTime
+
 
     def add2(self,L1,L2):  #第二种方法
 
@@ -33,8 +38,41 @@ class num_add(object):
         if(a3[0]==0):
             a3.pop(0)
         a33=[str(i) for i in a3]
-        print(''.join(a33))
-        print('耗时{0}ms'.format(time.time()-startTime))
+        a44=''.join(a33)
+        totalTime = time.time() - startTime
+        print(a44)
+        print('方法二耗时{0}ms'.format(totalTime))
+        return a44,totalTime
 
 
 
+class tool(object):
+    def random_number(self,digits):   # 生成任意长度的大数
+        number=[]
+        number = "".join([str(random.randint(0, 9)) for i in range(0, digits)])
+        return number
+
+    def are_equal(self,j,k):  # 验证两种方法相加后的结果是否相等
+        if int(j) == int(k):
+            print("两数相等")
+        else:
+            print("两数不相等")
+    def time_faster(self,t1,t2):# 验证两种方法那种比较快
+        if t1 > t2:
+            print("方法二速度较快")
+        else:
+            print("方法一速度较快")
+
+
+# u=tool()
+# num1=u.random_number(90000)    #在90000位数时两种方法时间大致相等，大于90000位数时方法二较快，小于90000位数时方法一较快
+# num2=u.random_number(90000)
+# print(num1)
+# print(num2)
+# s=num_add()
+# j,t1=s.add1(num1,num2)
+# k,t2=s.add2(num1,num2)
+# 
+# u.are_equal(j,k)
+#
+# u.time_faster(t1,t2)
